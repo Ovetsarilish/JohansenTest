@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Johansen Cointegration Test Results (Testing for Zero Cointegrating Relationships):</h1>
+<div>
+    <h4>Trace Statistics : </h4>
+    <p>{{trace_stats}}</p>
+    <h4>Eigen Statistics</h4>
+    <p>{{eigen_stats}}</p>
+    <h4>Critical Values</h4>
+    <p>{{crit_val}}</p>
+    <span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </span>
+    <p>
+        {% for stk in st_dict %}
+        <div>Pair {{stk.st1}} and {{stk.st2}}</div> 
+        <div>Trace statistics : {{stk.trace_statistics}}</div>
+        <div>Eigen Statistics : {{stk.eigen_statistics}}</div>
+        <span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </span>
+        {% endfor %}
+        <h3>Cointegration Assessment: Testing for Zero Cointegrating Relationships (Null Hypothesis)</h3>
+        {% for stk in pair_dict %}
+            {% if stk.flag == True %}
+            <div>Pair {{stk.stock1}} and {{stk.stock2}} and {{stk.trace_value}} are cointegrated</div>
+            {% else %}
+            <div>Pair {{stk.stock1}} and {{stk.stock2}} and {{stk.cr_value}} are not cointegrated</div>
+            {% endif %}
+        {% endfor %}
+    </p>
+</div>
+</body>
+</html>
